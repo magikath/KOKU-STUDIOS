@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+
+<head>
+  <title>KOKU STUDIOS</title>
+
+  <!--- Information you don't want to display to users -->
+  <link rel="stylesheet" type="text/css" href="stylesheet.css" />
+
+</head>
+
+<body>
+  <script type="text/javascript" src="./index.js"></script>
+  <!-- <div style="background-image: url(./images/home-banner-img.JPG); background-repeat: no-repeat; background-size: cover;"> -->
+  <header>
+    <div id="navbar">
+      <a class="logo" href="./index.html"><img src="/images/koku-logo-sm.png"
+        style="size: 50%;"></a>
+      <ul>
+        <li><a class="nav-item button" href="./about.html"> ABOUT </a> </li>
+        <li><a class="nav-item button" href="./work.html"> WORKS </a> </li>
+        <li><a class="nav-item button" href="./contact.html"> CONTACT </a> </li>
+      </ul>
+
+    </div>
+
+
+  </header>
+  <div class="home-section" id="home">
+    <img src="./images/para-background.png" id="background">
+    <img src="./images/para-me.png" id="me">
+    <img src="./images/para-doodles.png" id="doodles">
+    <img src="./images/para-koku.png" id="koku">
+  </div>
+
+  <div class="content">
+
+    <h1> BIG TEXT HERE THANKS</h1>
+    <br><br><br>
+    <h1> BIG TEXT HERE THANKS</h1>
+    <br><br><br>
+
+    <h1> BIG TEXT HERE THANKS</h1>
+    <br><br><br>
+    <h1> BIG TEXT HERE THANKS</h1>
+    <br><br><br>
+    <h1> BIG TEXT HERE THANKS</h1>
+    <br><br><br>
+    <h1> BIG TEXT HERE THANKS</h1>
+    <br><br><br>
+    <h1> BIG TEXT HERE THANKS</h1>
+    <br><br><br>
+    <h1> BIG TEXT HERE THANKS</h1>
+    <br><br><br>
+
+
+  </div>
+
+  <script>
+
+    let background = document.getElementById("background");
+    let koku = document.getElementById("koku");
+    let doodles = document.getElementById("doodles");
+    let me = document.getElementById("me");
+
+    let btn = document.getElementById("btn-letsgo");
+    let header = document.querySelector("header");
+    
+
+    console.log(me);
+    console.log(background);
+    console.log(koku);
+    console.log(document.getElementById("koku"));
+
+    window.addEventListener("scroll", function () {
+      let value = window.scrollY;
+      console.log(value);
+      me.style.top = value * 0 + "px";
+      doodles.style.top = value * 0.25 + "px";
+      koku.style.top = value * 1.05 + "px";
+      background.style.top = value * 0 + "px";
+      //btn.style.marginTop = value * 1 + "px";
+      header.style.top = value * 0.5 + "px";
+
+    });
+
+  </script>
+  <!-- <script>
+                window.onscroll = function() {myFunction()};
+                
+                var navbar = document.getElementById("navbar");
+                var sticky = navbar.offsetTop;
+                
+                function myFunction() {
+                  if (window.pageYOffset >= sticky) {
+                    navbar.classList.add("sticky")
+                  } else {
+                    navbar.classList.remove("sticky");
+                  }
+                }
+            </script> -->
+
+  <!-- <section class="home-section">
+            <img src="./images/home-banner-img.JPG" style="background-repeat: no-repeat; background-size: cover; width:100%">
+        </section> -->
+</body>
+
+</html>
