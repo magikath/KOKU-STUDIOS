@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+
+<head>
+  <title>KOKU STUDIOS</title>
+
+  <!--- Information you don't want to display to users -->
+  <link rel="stylesheet" type="text/css" href="about.css" />
+
+</head>
+
+<body class="fade-in">
+  <!-- <div style="background-image: url(./images/home-banner-img.JPG); background-repeat: no-repeat; background-size: cover;"> -->
+    <!-- <div class="zoom">
+        <img src="./images/about-me.JPG">
+    </div> -->
+
+    
+    <header>
+        <div id="navbar">
+          <a class="logo" href="./index.html"><img src="/images/koku-logo-sm.png"
+            style="size: 50%;"></a>
+          <ul>
+            <li><a class="nav-item button" href="./about.html"> ABOUT </a> </li>
+            <li><a class="nav-item button" href="./work.html"> WORKS </a> </li>
+            <li><a class="nav-item button" href="./contact.html"> CONTACT </a> </li>
+          </ul>
+    
+        </div>
+    
+    
+      </header>
+      <div class="home-section" id="home">
+        <img src="./images/para-background.png" id="background">
+        <img src="./images/para-me.png" id="me">
+        <img src="./images/para-doodles.png" id="doodles">
+        <img src="./images/para-koku.png" id="koku">
+      </div>
+    
+      <div class="content">
+        <section class="tag">
+          <h1 >Hi There! &#128075 </h1>
+        </section>
+    
+        <section class="tag">
+          <p>
+            My name is Kathleen Oku, but you can call me “Kath”, “KOKU” whatever floats your boat. 
+          </p>
+        </section>
+    
+        <section class="tag">
+          <p>I am a recent graduate of the University of Wisconsin - Madison with a Bachelor of Arts in Computer Science. I currently work at Beam Suntory as a Junior IT Analyst in User Experience and a freelance graphic designer on the side. 
+          </p>
+        </section>
+    
+        <section class="tag">
+          <p>I built this personal website to house some of my creative endeavors over the years. While I am passionate about my career and making information in the digital space more accessible and user-friendly for everyone - I also have a great love for the arts, design, fashion, photography and sustainability in these spaces. 
+          </p>
+        </section>
+        
+        <section class="tag">
+          <p>I see user experience as a form of storytelling and design to be the channel. With my skillset I hope to inspire others to follow their passions, make a difference in the design space, a disrupt our current way of curating and designing content. Knowledge should be accessible to all.
+          </p>
+        </section>
+      </div>
+    
+     
+    
+      <footer>
+        <a href="#" class="logo"><img src="./images/koku-logo-sm.png" alt="Logo"></a>
+        <p>2022 © Kathleen Oku</p>
+        <div class="social">
+          <a href="https://codepen.io/k-oku" target="_blank" rel="noopener noreferrer" title="Link to author's Codepen profile">
+           
+            <span class="icon icon-codepen"></span>    
+          
+          </a>
+          <a id="profile-link" href="https://github.com/magikath/" target="_blank" rel="noopener noreferrer" title="Link to author's GitHub profile">
+     
+              <span class="icon icon-github"></span>
+           
+          </a>
+          </a>
+          <a href="https://www.instagram.com/kokustudios/" target="_blank" rel="noopener noreferrer" title="Link to author's Twitter profile">
+         
+            <span class="icon icon-insta"></span>
+    
+            
+          </a>
+        </div>
+      </footer>
+    
+      <script>
+    
+        let background = document.getElementById("background");
+        let koku = document.getElementById("koku");
+        let doodles = document.getElementById("doodles");
+        let me = document.getElementById("me");
+    
+        let btn = document.getElementById("btn-letsgo");
+        let header = document.querySelector("header");
+    
+        window.addEventListener("scroll", function () {
+          let value = window.scrollY;
+          me.style.top = value * 0 + "px";
+          doodles.style.top = value * 0.25 + "px";
+          koku.style.top = value * 1.05 + "px";
+          background.style.top = value * 0 + "px";
+          //btn.style.marginTop = value * 1 + "px";
+          header.style.top = value * 0.5 + "px";
+    
+        });
+    
+        window.addEventListener("scroll", function() {
+          var pageTop = document.scrollY;
+          var pageBottom = window.innerHeight;
+          var tags = document.getElementsByClassName("tag");
+    
+          for (var i = 0; i < tags.length; i++) {
+            var curr = tags[i];
+            var rect = curr.getBoundingClientRect();
+            if (rect.top < pageBottom) {
+              curr.classList.add("visible");
+            } else {
+              curr.classList.remove("visible");
+            }
+          }
+          
+        });
+    
+        const track = document.getElementById("image-track");
+    
+        const handleOnDown = e => track.dataset.mouseDownAt = e.clientX;
+    
+        const handleOnUp = () => {
+          track.dataset.mouseDownAt = "0";  
+          track.dataset.prevPercentage = track.dataset.percentage;
+        }
+    
+        const handleOnMove = e => {
+          if(track.dataset.mouseDownAt === "0") return;
+          
+          const mouseDelta = parseFloat(track.dataset.mouseDownAt) - e.clientX,
+                maxDelta = window.innerWidth / 2;
+          
+          const percentage = (mouseDelta / maxDelta) * -100,
+                nextPercentageUnconstrained = parseFloat(track.dataset.prevPercentage) + percentage,
+                nextPercentage = Math.max(Math.min(nextPercentageUnconstrained, 0), -100);
+          
+          track.dataset.percentage = nextPercentage;
+          
+          track.animate({
+            transform: `translate(${nextPercentage}%, -50%)`
+          }, { duration: 1200, fill: "forwards" });
+          
+          for(const image of track.getElementsByClassName("image")) {
+            image.animate({
+              objectPosition: `${100 + nextPercentage}% center`
+            }, { duration: 1200, fill: "forwards" });
+          }
+        }
+    
+        // const images = document.getElementsByClassName("image");
+    
+        // window.addEventListener("dblclick", function(){
+        //   var images = document.getElementsByClassName("image");
+          
+        //   for (var i = 0; i < images.length; i++) {
+        //     var curr = images[i];
+        //     curr.animate({
+        //     transform: `scale(10.0)`
+        //   }, { duration: 1200, fill: "forwards" });
+        //   }
+    
+        // });
+    
+        // const images = document.getElementsByClassName("clickable");
+    
+        // images.array.forEach(img => {
+        //   img.addEventListener('dblclick', function() {
+        //     img.animate({transform: `scale(10.0)`
+        //   }, { duration: 1200, fill: "forwards"});
+        // })
+        // });
+    
+    
+        /* -- Had to add extra lines for touch events -- */
+    
+        window.onmousedown = e => handleOnDown(e);
+    
+        window.ontouchstart = e => handleOnDown(e.touches[0]);
+    
+        window.onmouseup = e => handleOnUp(e);
+    
+        window.ontouchend = e => handleOnUp(e.touches[0]);
+    
+        window.onmousemove = e => handleOnMove(e);
+    
+        window.ontouchmove = e => handleOnMove(e.touches[0]);
+      </script>
+      <!-- <script>
+                    window.onscroll = function() {myFunction()};
+                    
+                    var navbar = document.getElementById("navbar");
+                    var sticky = navbar.offsetTop;
+                    
+                    function myFunction() {
+                      if (window.pageYOffset >= sticky) {
+                        navbar.classList.add("sticky")
+                      } else {
+                        navbar.classList.remove("sticky");
+                      }
+                    }
+                </script> -->
+    
+      <!-- <section class="home-section">
+                <img src="./images/home-banner-img.JPG" style="background-repeat: no-repeat; background-size: cover; width:100%">
+            </section> -->
+    </body>
+    
+    </html>

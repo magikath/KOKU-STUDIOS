@@ -35,27 +35,67 @@
   </div>
 
   <div class="content">
+    <section class="tag">
+      <h1 >Hi There! &#128075 </h1>
+    </section>
 
-    <h1> BIG TEXT HERE THANKS</h1>
-    <br><br><br>
-    <h1> BIG TEXT HERE THANKS</h1>
-    <br><br><br>
+    <section class="tag">
+      <p>
+        My name is Kathleen Oku, but you can call me “Kath”, “KOKU” whatever floats your boat. 
+      </p>
+    </section>
 
-    <h1> BIG TEXT HERE THANKS</h1>
-    <br><br><br>
-    <h1> BIG TEXT HERE THANKS</h1>
-    <br><br><br>
-    <h1> BIG TEXT HERE THANKS</h1>
-    <br><br><br>
-    <h1> BIG TEXT HERE THANKS</h1>
-    <br><br><br>
-    <h1> BIG TEXT HERE THANKS</h1>
-    <br><br><br>
-    <h1> BIG TEXT HERE THANKS</h1>
-    <br><br><br>
+    <section class="tag">
+      <p>I am a recent graduate of the University of Wisconsin - Madison with a Bachelor of Arts in Computer Science. I currently work at Beam Suntory as a Junior IT Analyst in User Experience and a freelance graphic designer on the side. 
+      </p>
+    </section>
 
-
+    <section class="tag">
+      <p>I built this personal website to house some of my creative endeavors over the years. While I am passionate about my career and making information in the digital space more accessible and user-friendly for everyone - I also have a great love for the arts, design, fashion, photography and sustainability in these spaces. 
+      </p>
+    </section>
+    
+    <section class="tag">
+      <p>I see user experience as a form of storytelling and design to be the channel. With my skillset I hope to inspire others to follow their passions, make a difference in the design space, a disrupt our current way of curating and designing content. Knowledge should be accessible to all.
+      </p>
+    </section>
   </div>
+
+  <div class="container">
+    <div id="image-track" data-mouse-down-at="0" data-prev-percentage="0">
+      <a href="./about.html"> <img class="image clickable" src="./images/about-me.JPG" draggable="false" onclick="zoom1()" id="img2"> </a>
+      <img class="image clickable" src="./images/about-me.JPG" draggable="false" id="img1" href = "./about.html">
+      <img class="image clickable" src="./images/FGG.png" draggable="false">
+      <img class="image clickable" src="./images/koku-web-banner-full.png" draggable="false">
+      <img class="image clickable" src="./images/apparel.jpg" draggable="false">
+      <img class="image clickable" src="./images/photography.jpg" draggable="false">
+      <img class="image clickable" src="./images/art.JPG" draggable="false">
+    </div>
+  </div>
+
+  <footer>
+    <a href="#" class="logo"><img src="./images/koku-logo-sm.png" alt="Logo"></a>
+    <p>2022 © Kathleen Oku</p>
+    <div class="social">
+      <a href="https://codepen.io/k-oku" target="_blank" rel="noopener noreferrer" title="Link to author's Codepen profile">
+       
+        <span class="icon icon-codepen"></span>    
+      
+      </a>
+      <a id="profile-link" href="https://github.com/magikath/" target="_blank" rel="noopener noreferrer" title="Link to author's GitHub profile">
+ 
+          <span class="icon icon-github"></span>
+       
+      </a>
+      </a>
+      <a href="https://www.instagram.com/kokustudios/" target="_blank" rel="noopener noreferrer" title="Link to author's Twitter profile">
+     
+        <span class="icon icon-insta"></span>
+
+        
+      </a>
+    </div>
+  </footer>
 
   <script>
 
@@ -66,16 +106,9 @@
 
     let btn = document.getElementById("btn-letsgo");
     let header = document.querySelector("header");
-    
-
-    console.log(me);
-    console.log(background);
-    console.log(koku);
-    console.log(document.getElementById("koku"));
 
     window.addEventListener("scroll", function () {
       let value = window.scrollY;
-      console.log(value);
       me.style.top = value * 0 + "px";
       doodles.style.top = value * 0.25 + "px";
       koku.style.top = value * 1.05 + "px";
@@ -85,6 +118,165 @@
 
     });
 
+    window.addEventListener("scroll", function() {
+      var pageTop = document.scrollY;
+      var pageBottom = window.innerHeight;
+      var tags = document.getElementsByClassName("tag");
+
+      for (var i = 0; i < tags.length; i++) {
+        var curr = tags[i];
+        var rect = curr.getBoundingClientRect();
+        if (rect.top < pageBottom) {
+          curr.classList.add("visible");
+        } else {
+          curr.classList.remove("visible");
+        }
+      }
+      
+    });
+
+    const track = document.getElementById("image-track");
+
+    const handleOnDown = e => track.dataset.mouseDownAt = e.clientX;
+
+    const handleOnUp = () => {
+      track.dataset.mouseDownAt = "0";  
+      track.dataset.prevPercentage = track.dataset.percentage;
+    }
+
+    const handleOnMove = e => {
+      if(track.dataset.mouseDownAt === "0") return;
+      
+      const mouseDelta = parseFloat(track.dataset.mouseDownAt) - e.clientX,
+            maxDelta = window.innerWidth / 2;
+      
+      const percentage = (mouseDelta / maxDelta) * -100,
+            nextPercentageUnconstrained = parseFloat(track.dataset.prevPercentage) + percentage,
+            nextPercentage = Math.max(Math.min(nextPercentageUnconstrained, 0), -100);
+      
+      track.dataset.percentage = nextPercentage;
+      
+      track.animate({
+        transform: `translate(${nextPercentage}%, -50%)`
+      }, { duration: 1200, fill: "forwards" });
+      
+      for(const image of track.getElementsByClassName("image")) {
+        image.animate({
+          objectPosition: `${100 + nextPercentage}% center`
+        }, { duration: 1200, fill: "forwards" });
+      }
+    }
+
+    // const images = document.getElementsByClassName("image");
+
+    // window.addEventListener("dblclick", function(){
+    //   var images = document.getElementsByClassName("image");
+      
+    //   for (var i = 0; i < images.length; i++) {
+    //     var curr = images[i];
+    //     curr.animate({
+    //     transform: `scale(10.0)`
+    //   }, { duration: 1200, fill: "forwards" });
+    //   }
+
+    // });
+
+    // const images = document.getElementsByClassName("clickable");
+
+    // images.array.forEach(img => {
+    //   img.addEventListener('dblclick', function() {
+    //     img.animate({transform: `scale(10.0)`
+    //   }, { duration: 1200, fill: "forwards"});
+    // })
+    // });
+
+    const img1 = document.getElementById("img1");
+    const images = document.getElementsByClassName("image");
+
+    img1.addEventListener("dblclick", function(e) {
+
+      console.log("ok 194");
+      e.preventDefault();
+      console.log("success prevent default");
+      img1.style.zIndex = 1000;
+      console.log("sabout to call animate");
+     img1.animate({
+        transform:'scale(10)', opacity:'0'}, {duration: 1200, fill:"forwards"},
+      );
+
+      console.log("requesting animation frame");
+      window.requestAnimationFrame(step);
+      
+    });
+
+
+    
+    let start, previousTimeStamp;
+    let done = false
+
+      function step(timestamp) {
+        if (start === undefined) {
+          start = timestamp;
+          }
+        const elapsed = timestamp - start;
+
+        if (previousTimeStamp !== timestamp) {
+          // Math.min() is used here to make sure the element stops at exactly 200px
+          const count = Math.min(0.1 * elapsed, 100);
+         
+          for(i = 0; i < images.length;i ++) {
+            images[i].style.opacity = (100-count)/1000;
+          }
+          if (count === 100) done = true;
+        }
+
+        if (done) {
+          console.log("should be done");
+          window.open('./about.html',"_self");
+        }
+
+        if (elapsed < 1000) { // Stop the animation after 2 seconds
+          previousTimeStamp = timestamp;
+          if (!done) {
+            window.requestAnimationFrame(step);
+            console.log("not done yet");
+          } else {
+            console.log("should be done");
+            window.open('./about.html',"_self");
+     
+          }
+        }
+      }
+
+
+
+  // const img1 = document.getElementById("img1");
+  //   img1.ondblclick = function() {
+  //     img1.style.zIndex = 1000;
+  //     img1.animate({
+  //       transform:'scale(10)'}, {duration: 1200, fill:"forwards"}
+  //     );
+  //     var win= window.open('./about.html',"_self");
+  //     win.focus();
+  //   };
+
+
+   
+
+
+    /* -- Had to add extra lines for touch events -- */
+
+    window.onmousedown = e => handleOnDown(e);
+
+    window.ontouchstart = e => handleOnDown(e.touches[0]);
+
+    window.onmouseup = e => handleOnUp(e);
+
+    window.ontouchend = e => handleOnUp(e.touches[0]);
+
+    window.onmousemove = e => handleOnMove(e);
+
+    window.ontouchmove = e => handleOnMove(e.touches[0]);
   </script>
   <!-- <script>
                 window.onscroll = function() {myFunction()};
