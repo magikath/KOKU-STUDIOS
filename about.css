@@ -36,6 +36,7 @@
     display: inline-block;
     margin-right: 10px;
     color: #fff;
+    
   }
   body {
     width: 100vw;
@@ -114,7 +115,7 @@
   /* Home section */
   .home-section {
       position: relative;
-      height: 100vh;
+      height: 75vh;
       flex:100%;
       padding-top: 10vh; /*NEEDS TO CHANGE BASED ON SCREEN SIZE*/
       display: flex;
@@ -128,11 +129,11 @@
       position: relative;
       bottom: 0;
       left: 0;
-      height: 35vh;
+      height: 100vh;
       width:auto;
       flex:100%;
       display:flex;
-      background: linear-gradient(to top, white, transparent);
+      background: linear-gradient(to top, white, transparent 65%);
       z-index: 1000;
   
     }
@@ -151,10 +152,9 @@
   
     }
     
-    .home-section img#koku {
+    .home-section img#text {
       mix-blend-mode: screen;
       z-index: 50;
-      padding-top: 10rem;
     }
     
     .home-section img#background {
@@ -216,16 +216,52 @@
       padding-bottom: 20px;
   }
   
-  
-    
-  .col-6 {
-      flex: 50%;
+  .vert-carousel {
+      position: relative;
+      height: 100vh;
+      flex:100%;
+      padding-top: 10vh; /*NEEDS TO CHANGE BASED ON SCREEN SIZE*/
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow:hidden;;
   }
-  
+  .vert-carousel img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    object-fit: cover;
+    pointer-events: none;
+   
+    background-repeat: no-repeat;
+    background-size: cover;
+
+  }
+    
+  .text {
+    position: relative;
+    align-self: center;
+
+  }
+  .col-6 {
+    display: flex;
+    flex: 50%;
+  }
+  .col-3 {
+    display: flex;
+    flex: 25%;
+    width:25%
+  }
+  .vert-carousel > img {
+    height: 45vh;
+  }
   .row {
+    display: flex;
       flex: 100%;
   }
   
+ 
   /*TEXT STYLING*/
   
   h1 {
@@ -233,34 +269,44 @@
       font-family: 'Proxima Nova', 'Segoe UI', sans-serif;
       color: black;
       font-size: 3rem;
+      text-align: center;
   }
   h2 {
       font-family: 'Proxima Nova', 'Segoe UI', sans-serif;
       color: white;
+      text-align: center;
   }
   h3 {
       font-family: 'Proxima Nova', 'Segoe UI', sans-serif;
       color: black;
+      text-align: center;
   }
   h4 {
       font-family: 'Proxima Nova', 'Segoe UI', sans-serif;
       color: black;
+      text-align: center;
   }
   p{
     font-size: 1.5rem;
     font-family: 'Proxima Nova', 'Segoe UI', sans-serif;
     color: black;
+    text-align: center;
   }
   .content {
-      padding-left: 5rem;
-      padding-right: 5rem;
-      padding-bottom: 25rem;
+      padding-bottom: 25vh;
+      padding-top: 25vh;
       justify-content: center;
   }
   .tag {
       opacity: 0;
+      padding-left: 5vw;
+      padding-right: 5vw;
       transform: translate(0, 10vh);
       transition: all 1s;
+      padding-top: 20vh;
+      padding-bottom: 20vh;
+      text-align: center;
+
     }
   
   .tag.visible {
@@ -269,8 +315,11 @@
     }
   
   section { 
-    height: 200%;
+    height: 500%;
+    
    }
+
+   
   
   
    /* Footer */

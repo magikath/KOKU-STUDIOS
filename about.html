@@ -32,14 +32,16 @@
     
       </header>
       <div class="home-section" id="home">
-        <img src="./images/para-background.png" id="background">
-        <img src="./images/para-me.png" id="me">
-        <img src="./images/para-doodles.png" id="doodles">
-        <img src="./images/para-koku.png" id="koku">
+        <img src="./images/about-me/left.png" id="left">
+        <img src="./images/about-me/right.png" id="right">
+        <img src="./images/about-me/center.png" id="center">
+        <img src="./images/about-me/about-text.png" id="text">
       </div>
     
       <div class="content">
+        
         <section class="tag">
+          <br>
           <h1 >Hi There! &#128075 </h1>
         </section>
     
@@ -48,11 +50,30 @@
             My name is Kathleen Oku, but you can call me “Kath”, “KOKU” whatever floats your boat. 
           </p>
         </section>
-    
-        <section class="tag">
-          <p>I am a recent graduate of the University of Wisconsin - Madison with a Bachelor of Arts in Computer Science. I currently work at Beam Suntory as a Junior IT Analyst in User Experience and a freelance graphic designer on the side. 
-          </p>
-        </section>
+        <div class="row">
+          <div class="col-3">
+            <div class="vert-carousel">
+              <img src="./images/about-me/IMG_5242.JPG" id="left-1">
+              <img src="./images/about-me/IMG_5041.JPG" id="left-2">
+              <img src="./images/about-me/IMG_4912.JPG" id="left-3">
+            </div>
+          </div>
+          <div class="col-6">
+            <section class="tag text" style="height: 100vh; padding-top: 50vh;">
+              <p>I am a recent graduate of the University of Wisconsin - Madison with a Bachelor of Arts in Computer Science. 
+              </p>
+            </section>
+          </div>
+          <div class="col-3">
+            <div class="vert-carousel">
+              <img src="./images/about-me/IMG_5305.JPG" id="right-1">
+              <img src="./images/about-me/IMG_4960.JPG" id="right-2">
+              <img src="./images/about-me/IMG_5359.JPG" id="right-3">
+            </div>
+          </div>
+
+        </div>
+        
     
         <section class="tag">
           <p>I built this personal website to house some of my creative endeavors over the years. While I am passionate about my career and making information in the digital space more accessible and user-friendly for everyone - I also have a great love for the arts, design, fashion, photography and sustainability in these spaces. 
@@ -93,20 +114,20 @@
     
       <script>
     
-        let background = document.getElementById("background");
-        let koku = document.getElementById("koku");
-        let doodles = document.getElementById("doodles");
-        let me = document.getElementById("me");
+        let left = document.getElementById("left");
+        let right = document.getElementById("right");
+        let center = document.getElementById("center");
+        let text = document.getElementById("text");
     
         let btn = document.getElementById("btn-letsgo");
         let header = document.querySelector("header");
     
         window.addEventListener("scroll", function () {
           let value = window.scrollY;
-          me.style.top = value * 0 + "px";
-          doodles.style.top = value * 0.25 + "px";
-          koku.style.top = value * 1.05 + "px";
-          background.style.top = value * 0 + "px";
+          left.style.top = value * 0 + "px";
+          right.style.top = value * 0.5 + "px";
+          center.style.top = value * 1.25 + "px";
+          text.style.top = value * 0.55 + "px";
           //btn.style.marginTop = value * 1 + "px";
           header.style.top = value * 0.5 + "px";
     
@@ -128,95 +149,69 @@
           }
           
         });
+
+        let left1 = document.getElementById("left-1");
+        let left2 = document.getElementById("left-2");
+        let left3 = document.getElementById("left-3");
+
+        let right1 = document.getElementById("right-1");
+        let right2 = document.getElementById("right-2");
+        let right3 = document.getElementById("right-3");
     
-        const track = document.getElementById("image-track");
-    
-        const handleOnDown = e => track.dataset.mouseDownAt = e.clientX;
-    
-        const handleOnUp = () => {
-          track.dataset.mouseDownAt = "0";  
-          track.dataset.prevPercentage = track.dataset.percentage;
-        }
-    
-        const handleOnMove = e => {
-          if(track.dataset.mouseDownAt === "0") return;
+        window.addEventListener("scroll", function () {
+          let value = window.scrollY;
+          var pageTop = document.scrollY;
+          var pageBottom = window.innerHeight;
+
           
-          const mouseDelta = parseFloat(track.dataset.mouseDownAt) - e.clientX,
-                maxDelta = window.innerWidth / 2;
-          
-          const percentage = (mouseDelta / maxDelta) * -100,
-                nextPercentageUnconstrained = parseFloat(track.dataset.prevPercentage) + percentage,
-                nextPercentage = Math.max(Math.min(nextPercentageUnconstrained, 0), -100);
-          
-          track.dataset.percentage = nextPercentage;
-          
-          track.animate({
-            transform: `translate(${nextPercentage}%, -50%)`
-          }, { duration: 1200, fill: "forwards" });
-          
-          for(const image of track.getElementsByClassName("image")) {
-            image.animate({
-              objectPosition: `${100 + nextPercentage}% center`
-            }, { duration: 1200, fill: "forwards" });
+
+          console.log(scrollY)
+          if(value<1800) {
+            left1.style.zIndex = 100;
+            left2.style.zIndex = 50;
+            left3.style.zIndex = 0;
+
+            right1.style.zIndex = 100;
+            right2.style.zIndex = 50;
+            right3.style.zIndex = 0;
+
+            left1.style.top = value * 0 + "px";
+            left2.style.top = value * .1 +100+ "px";
+            left3.style.top = value * .2 +150 + "px";
+            
+            right1.style.top = value * 0 + "px";
+            right2.style.top = value * .1 +100+ "px";
+            right3.style.top = value * .2 +150 + "px";  
+
+          } else if(1800 < value < 2000) {
+            left2.style.zIndex = 100;
+            left1.style.zIndex = 0;
+            left3.style.zIndex = 0;
+
+            right2.style.zIndex = 100;
+            right1.style.zIndex = 0;
+            right3.style.zIndex = 0;
+
+            left1.style.top = value * 0 + "px";
+            left2.style.top = value * -.1 +500+ "px";
+            left3.style.top = value * .18 +150 + "px";
+            
+            right1.style.top = value * 0 + "px";
+            right2.style.top = value * -.1 +500+ "px";
+            right3.style.top = value * .18 +150 + "px";  
+
+          } else if(value > 2000) {
+            left3.style.zIndex = 1000;
+            left2.style.zIndex=100;
+            left1.style.zIndex=0;
+            right3.style.zIndex = 1000;
+            right2.style.zIndex=100;
+            right1.style.zIndex=0;
+
           }
-        }
-    
-        // const images = document.getElementsByClassName("image");
-    
-        // window.addEventListener("dblclick", function(){
-        //   var images = document.getElementsByClassName("image");
-          
-        //   for (var i = 0; i < images.length; i++) {
-        //     var curr = images[i];
-        //     curr.animate({
-        //     transform: `scale(10.0)`
-        //   }, { duration: 1200, fill: "forwards" });
-        //   }
-    
-        // });
-    
-        // const images = document.getElementsByClassName("clickable");
-    
-        // images.array.forEach(img => {
-        //   img.addEventListener('dblclick', function() {
-        //     img.animate({transform: `scale(10.0)`
-        //   }, { duration: 1200, fill: "forwards"});
-        // })
-        // });
-    
-    
-        /* -- Had to add extra lines for touch events -- */
-    
-        window.onmousedown = e => handleOnDown(e);
-    
-        window.ontouchstart = e => handleOnDown(e.touches[0]);
-    
-        window.onmouseup = e => handleOnUp(e);
-    
-        window.ontouchend = e => handleOnUp(e.touches[0]);
-    
-        window.onmousemove = e => handleOnMove(e);
-    
-        window.ontouchmove = e => handleOnMove(e.touches[0]);
+        });
+
       </script>
-      <!-- <script>
-                    window.onscroll = function() {myFunction()};
-                    
-                    var navbar = document.getElementById("navbar");
-                    var sticky = navbar.offsetTop;
-                    
-                    function myFunction() {
-                      if (window.pageYOffset >= sticky) {
-                        navbar.classList.add("sticky")
-                      } else {
-                        navbar.classList.remove("sticky");
-                      }
-                    }
-                </script> -->
-    
-      <!-- <section class="home-section">
-                <img src="./images/home-banner-img.JPG" style="background-repeat: no-repeat; background-size: cover; width:100%">
-            </section> -->
     </body>
     
     </html>
